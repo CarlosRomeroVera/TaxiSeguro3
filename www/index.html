@@ -39,11 +39,11 @@
         }
         #mapChoferComienzaViaje {
             width: 100%;
-            height: 89%;
+            height: 85%;
         }
         #mapPasajeroComienzaViaje {
             width: 100%;
-            height: 89%;
+            height: 85%;
         }
         #mapPasajeroComienzaViajeAlter {
             width: 100%;
@@ -254,6 +254,115 @@
                         }
                         
                     }
+                });//fin de ajax
+            }
+        </script>
+
+        <div class="popup popup-about">
+            <div class="content-block">
+                <div class="content-block-title">Cancelar viaje</div>
+                <div class="card">
+                  <div class="card-content">
+                    <div class="card-content-inner">
+                        <p>¿Porqué cancelas?</p>
+                        <a href="javascript: cancelacion('Problema_personal');" class="button active">Problema personal</a>
+                        <br>
+                        <a href="javascript: cancelacion('El_cliente_no_se_presento');" class="button active">El cliente no se presentó</a>
+                        <br>
+                        <a href="javascript: cancelacion('El_cliente_pidio_la_cancelacion');" class="button active">El cliente pidió la cancelación</a>
+                        <br>
+                        <a href="javascript: cancelacion('Direccion_incorrecta_error_del_sistema');" class="button active">Dirección incorrecta, error del sistema</a>
+                        <br>
+                        <a href="javascript: cancelacion('otro');" class="button active">Otro</a>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <a href="#" class="close-popup">Cerrar</a>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="popup popup-pasajero">
+            <div class="content-block">
+                <div class="content-block-title">Cancelar viaje</div>
+                <div class="card">
+                  <div class="card-content">
+                    <div class="card-content-inner">
+                        <p>¿Porqué cancelas?</p>
+                        <a href="javascript: cancelacionPasajero('Problema_personal');" class="button active">Problema personal</a>
+                        <br>
+                        <a href="javascript: cancelacionPasajero('El_chofer_no_se_presento');" class="button active">El chofer no se presentó</a>
+                        <br>
+                        <a href="javascript: cancelacionPasajero('El_chofer_pidio_la_cancelacion');" class="button active">El chofer pidió la cancelación</a>
+                        <br>
+                        <a href="javascript: cancelacionPasajero('Direccion_incorrecta_error_del_sistema');" class="button active">Dirección incorrecta, error del sistema</a>
+                        <br>
+                        <a href="javascript: cancelacionPasajero('otro');" class="button active">Otro</a>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <a href="#" class="close-popup">Cerrar</a>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+
+            function cancelacion(info){
+                $.ajax({
+                    type: "POST", 
+                    url:  window.server + "chofer/rechaza_viaje_encurso.php",
+                    data: ({
+                        id: window.viaje_id,
+                        info_adicional: info
+                    }),
+                    cache: false,
+                    dataType: "text",
+                    success: function(data){
+                        if (data) {
+                            $.ajax({
+                                type: "POST", 
+                                url:  window.server + "chofer/cambiar_estado.php",
+                                data: ({
+                                    id: window.user_id_global,
+                                }),
+                                cache: false,
+                                dataType: "text",
+                                success: function(data){
+                                    //document.getElementById('info').innerHTML = data;
+                                }
+                            });//fin de ajax
+                            myApp.closeModal('.popup-about')
+                            mainView.router.loadPage('view/Chofer/Index.html');
+                        }
+                    }
+                }).fail( function() {
+                    myApp.alert('Comprueba tu conexión a internet e intenta de nuevo', '¡Atención!');
+
+                });//fin de ajax
+            }
+
+            function cancelacionPasajero(info){
+                $.ajax({
+                    type: "POST", 
+                    url:  window.server + "pasajeros/cancelar_viaje_encurso.php",
+                    data: ({
+                        id: window.viaje_id,
+                        info_adicional: info
+                    }),
+                    cache: false,
+                    dataType: "text",
+                    success: function(data){
+                        if (data) {
+                            myApp.closeModal('.popup-pasajero')
+                            mainView.router.loadPage('view/Viajes/Index.html');
+                        }
+                    }
+                }).fail( function() {
+                    myApp.alert('Comprueba tu conexión a internet e intenta de nuevo', '¡Atención!');
+
                 });//fin de ajax
             }
         </script>

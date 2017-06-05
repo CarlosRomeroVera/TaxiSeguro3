@@ -899,6 +899,7 @@ myApp.onPageInit('ViajesIndex', function(page) {
                       myApp.alert('Comprueba tu conexión a internet', '¡Atención!');
                   });//fin de ajax
               }else{
+                  clearInterval(solicitudInterval);
                   myApp.alert('No se obtuvo la respuesta pronta del chofer, buscando otro...', "¡Atención!");
                   excluded.push(viaje.chofer_id);
                   reinicia();

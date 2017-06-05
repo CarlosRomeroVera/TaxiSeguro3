@@ -40,6 +40,10 @@ myApp.onPageInit('PasajeroComienzaViaje', function(page) {
                 if (viaje.estado_viaje_id == 'finalizado') {
                   clearInterval(refreshIntervalId);
                   mainView.router.loadPage('view/Pasajeros/terminaViaje.html');
+                }else if (viaje.estado_viaje_id == 'Rechazado') {
+                  clearInterval(refreshIntervalId);
+                  myApp.alert("El chofer ha cancelado el viaje debido a: "+viaje.info_adicional+", se le invita a solicitar otro servicio", "¡Atención!");
+                  mainView.router.loadPage('view/Viajes/Index.html');
                 }
               });
           }

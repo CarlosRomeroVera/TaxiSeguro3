@@ -163,6 +163,45 @@ myApp.onPageInit('ChoferAcepta', function(page) {
 	              
 	              },function(error){console.log(error);});
 
+		   		$.ajax({
+			          type: "POST", 
+			          url:  window.server + "chofer/obtener_viaje.php",
+			          data: ({
+			              id: window.viaje_id
+			          }),
+			          cache: false,
+			          dataType: "text",
+			          success: function(data){
+			              var obj = $.parseJSON(data);
+			              $.each(obj.viaje, function(i,viaje){
+			                if (viaje.estado_viaje_id == 'Cancelado') {
+			                  
+			                  	$.ajax({
+	                                type: "POST", 
+	                                url:  window.server + "chofer/cambiar_estado.php",
+	                                data: ({
+	                                    id: window.user_id_global,
+	                                }),
+	                                cache: false,
+	                                dataType: "text",
+	                                async: false,
+	                                success: function(data){
+	                                	clearInterval(refreshIntervalId);
+	                                    myApp.alert("El cliente ha cancelado el viaje debido a: "+viaje.info_adicional, "¡Atención!");
+			                  			mainView.router.loadPage('view/Chofer/Index.html');
+	                                }
+	                            });//fin de ajax
+			                  
+			                }
+			              });
+			          }
+			      }).fail( function() {
+
+			            //alert( 'Comprueba tu conexión a internet e intenta de nuevo' );
+			            myApp.alert('Comprueba tu conexión a internet', '¡Atención!');
+
+			        });//fin de ajax
+
 		   };
 
           refreshIntervalId = setInterval(sync, 5000);
