@@ -7,37 +7,38 @@ $('#GuardarPasajero').attr('disabled', true);
 
 var Ttipousuario_id2;
     $(function() {
+        Ttipousuario_id2 = '25bfe9bb-1f25-11e7-a5c1-34e6d76e4d35';
 
-        $(document).ready(function(){
-                    $("#showdata").html("");
+        // $(document).ready(function(){
+                    // $("#showdata").html("");
 
-                    //OBTIENE EL ID DE TIPOPASAJERO PASA INSERTARLO AL NUEVO USUARIO
+                    // //OBTIENE EL ID DE TIPOPASAJERO PASA INSERTARLO AL NUEVO USUARIO
 
-                    Tusuario="PASAJERO";
-                    data="";
-                    $.ajax({
-                                type: "GET", 
-                                url:        window.server + "tipousuario/obtener_tipousuario.php",
-                                data: ({
-                                      tipousuario: Tusuario,                                      
-                                  }),
-                        dataType:   "html",
-                        success:    function(data){
+                    // Tusuario="Pasajero";
+                    // data="";
+                    // $.ajax({
+                    //             type: "GET", 
+                    //             url:        window.server + "tipousuario/obtener_tipousuario.php",
+                    //             data: ({
+                    //                   tipousuario: Tusuario,                                      
+                    //               }),
+                    //     dataType:   "html",
+                    //     success:    function(data){
                         
                                          
-                            var obj = $.parseJSON(data);
-                            var datos = "";
+                    //         var obj = $.parseJSON(data);
+                    //         var datos = "";
                             
-                            $.each(obj.tipousuario, function(i,tipousuario){
-                              Ttipousuario_id2 =tipousuario.tipousuario_id;
-                            });
-                        }
-                    });
+                    //         $.each(obj.tipousuario, function(i,tipousuario){
+                    //           Ttipousuario_id2 =tipousuario.tipousuario_id;
+                    //         });
+                    //     }
+                    // });
 
 
                     
 
-        }); //Termina Document.Ready
+        // }); //Termina Document.Ready
 
         
 

@@ -840,7 +840,7 @@ myApp.onPageInit('ViajesIndex', function(page) {
             function reinicia(){
               $.ajax({
                   type: "POST", 
-                  url:  window.server + "Viajes/reiniciar_viaje.php",
+                  url:  window.server + "viajes/reiniciar_viaje.php",
                   data: ({
                       id : window.viaje_id
                   }),
@@ -884,7 +884,7 @@ myApp.onPageInit('ViajesIndex', function(page) {
                             myApp.alert('El chofer aceptó, obteniendo datos de su ubicación...', "¡Atención!");
                             mainView.router.loadPage('view/Viajes/comienzaViajes.html');
                           }else if (viaje.estado_viaje_id == 'Rechazado') {
-                            //clearInterval(solicitudInterval);
+                            clearInterval(solicitudInterval);
                             myApp.alert('El chofer rechazó la petición, asignando otro chofer en línea...', "¡Atención!");
                             excluded.push(viaje.chofer_id);
                             reinicia();
@@ -896,13 +896,40 @@ myApp.onPageInit('ViajesIndex', function(page) {
                 }).fail( function() {
 
                       //alert( 'Comprueba tu conexión a internet e intenta de nuevo' );
+                      clearInterval(solicitudInterval);
                       myApp.alert('Comprueba tu conexión a internet', '¡Atención!');
+                      mainView.router.loadPage('view/Viajes/Index.html');
                   });//fin de ajax
               }else{
-                  clearInterval(solicitudInterval);
-                  myApp.alert('No se obtuvo la respuesta pronta del chofer, buscando otro...', "¡Atención!");
-                  excluded.push(viaje.chofer_id);
-                  reinicia();
+                  $.ajax({
+                    type: "POST", 
+                    url:  window.server + "chofer/obtener_viaje.php",
+                    data: ({
+                        id : window.viaje_id
+                    }),
+                  
+                    cache: false,
+                    dataType: "text",
+                    success: function(data){
+                      if (data != 'Error') {
+                        var obj = $.parseJSON(data);
+                        $.each(obj.viaje, function(i,viaje){
+                          clearInterval(solicitudInterval);
+                          myApp.alert('No se obtuvo la respuesta pronta del chofer, buscando otro...', "¡Atención!");
+                          excluded.push(viaje.chofer_id);
+                          reinicia();
+                        });
+                        //myApp.alert('Chofer asignado, esperando respuesta...', "¡Atención!");
+                      }
+                    }
+                  }).fail( function() {
+
+                      //alert( 'Comprueba tu conexión a internet e intenta de nuevo' );
+                      clearInterval(solicitudInterval);
+                      myApp.alert('Comprueba tu conexión a internet', '¡Atención!');
+                      mainView.router.loadPage('view/Viajes/Index.html');
+                  });//fin de ajax
+                  
               }
               
             };

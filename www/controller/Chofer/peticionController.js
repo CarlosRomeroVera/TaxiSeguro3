@@ -11,7 +11,7 @@ myApp.onPageInit('ChoferPeticion', function(page) {
             success: function(data){
                 if (data) {
                     //clearInterval(refreshIntervalId);
-                    myApp.alert("Se acabo el tiempo de espera, considera desconectarte si estas indispuesto para viajes", "¡Atención!");
+                    myApp.alert("Considera desconectarte si estas indispuesto para viajes", "¡Atención!");
                     mainView.router.loadPage('view/Chofer/Index.html');
                 }else{
                     myApp.alert(data, "¡Atención!");

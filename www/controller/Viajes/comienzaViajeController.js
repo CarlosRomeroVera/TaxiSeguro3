@@ -43,7 +43,7 @@ myApp.onPageInit('PasajeroComienzaViaje', function(page) {
                         //mainView.router.loadPage('view/Pasajeros/comienzaViaje.html');
                         myApp.alert("El chofer ha llegado por usted, porfavor aborde el taxi", "¡Atención!");
                         notifica = 1;
-				    }else if (viaje.estado_viaje_id == 'en curso') {
+				    }else if (viaje.estado_viaje_id == 'en_curso') {
 				    	clearInterval(refreshIntervalId);
                         mainView.router.loadPage('view/Pasajeros/comienzaViaje.html');
 				    }else if (viaje.estado_viaje_id == 'Rechazado') {

@@ -1,4 +1,5 @@
 myApp.onPageInit('ChoferComienzaViaje', function(page) {
+  //alert('iniciando js chofercomienzaviaje');
 	var viaje_inicio = '';
 	var marker;          //variable del marcador
     var coords = {};    //coordenadas obtenidas con la geolocalización
@@ -27,48 +28,49 @@ myApp.onPageInit('ChoferComienzaViaje', function(page) {
           },function(error){console.log(error);}
         );
 
-        // $.ajax({
-        //     type: "POST", 
-        //     url:  window.server + "chofer/obtener_viaje.php",
-        //     data: ({
-        //         id: window.viaje_id
-        //     }),
-        //     cache: false,
-        //     dataType: "text",
-        //     success: function(data){
-        //         var obj = $.parseJSON(data);
-        //         $.each(obj.viaje, function(i,viaje){
-        //           if (viaje.estado_viaje_id == 'Cancelado') {
-                    
-        //               $.ajax({
-        //                       type: "POST", 
-        //                       url:  window.server + "chofer/cambiar_estado.php",
-        //                       data: ({
-        //                           id: window.user_id_global,
-        //                       }),
-        //                       cache: false,
-        //                       dataType: "text",
-        //                       async: false,
-        //                       success: function(data){
-        //                           clearInterval(refreshIntervalId);
-        //                           myApp.alert("El cliente ha cancelado el viaje debido a: "+viaje.info_adicional, "¡Atención!");
-        //                           mainView.router.loadPage('view/Chofer/Index.html');
-        //                       }
-        //                   });//fin de ajax
-        //           }
-        //         });
-        //     }
-        // }).fail( function() {
+        $.ajax({
+            type: "POST", 
+            url:  window.server + "chofer/obtener_viaje.php",
+            data: ({
+                id: window.viaje_id
+            }),
+            cache: false,
+            dataType: "text",
+            async: false,
+            success: function(data){
+                var obj = $.parseJSON(data);
+                $.each(obj.viaje, function(i,viaje){
+                  if (viaje.estado_viaje_id == 'Cancelado') {
+                      clearInterval(refreshIntervalId);
+                      $.ajax({
+                              type: "POST", 
+                              url:  window.server + "chofer/cambiar_estado.php",
+                              data: ({
+                                  id: window.user_id_global,
+                              }),
+                              cache: false,
+                              dataType: "text",
+                              async: false,
+                              success: function(data){
+                                  myApp.alert("El cliente ha cancelado el viaje debido a: "+viaje.info_adicional, "¡Atención!");
+                                  mainView.router.loadPage('view/Chofer/Index.html');
+                              }
+                          });//fin de ajax
+                  }
+                });
+            }
+        }).fail( function() {
 
-        //       //alert( 'Comprueba tu conexión a internet e intenta de nuevo' );
-        //       myApp.alert('Comprueba tu conexión a internet', '¡Atención!');
+              //alert( 'Comprueba tu conexión a internet e intenta de nuevo' );
+              myApp.alert('Comprueba tu conexión a internet', '¡Atención!');
 
-        //   });//fin de ajax
-    };
+          });//fin de ajax
+    }
 
 	$(function() {
 
     function obtenerChoferDatos(){
+      //alert('obteniendo chofer');
       $.ajax({
           type: "POST", 
           url:  window.server + "chofer/obtener_viaje.php",
@@ -108,7 +110,7 @@ myApp.onPageInit('ChoferComienzaViaje', function(page) {
 		        url:  window.server + "chofer/cambiar_estado_viaje.php",
 		        data: ({
 		            id: window.viaje_id,
-		            estado: 'en curso'
+		            estado: 'en_curso'
 		        }),
 		        cache: false,
 		        dataType: "text",
@@ -129,12 +131,14 @@ myApp.onPageInit('ChoferComienzaViaje', function(page) {
 
         });//fin de ajax
 		});
+
+    obtenerChoferDatos();
 	});
 
 	function initMap ()
     {
-
-        //usamos la API para geolocalizar el usuario
+          //alert('iniciando mapa');
+          //usamos la API para geolocalizar el usuario
             navigator.geolocation.getCurrentPosition(
               function (position){
                 coords =  {
@@ -150,6 +154,7 @@ myApp.onPageInit('ChoferComienzaViaje', function(page) {
 
     function setMapa (coords)
     {  
+          //alert('seteando mapa');
           //Se crea una nueva instancia del objeto mapa
           var directionsDisplay = new google.maps.DirectionsRenderer();
           var directionsService = new google.maps.DirectionsService();

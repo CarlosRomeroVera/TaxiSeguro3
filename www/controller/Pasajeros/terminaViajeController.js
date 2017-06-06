@@ -65,6 +65,7 @@ myApp.onPageInit('PasajeroTerminaViaje', function(page) {
                     id: id,
                     viaje_id: window.viaje_id,
                     calificacion: $("#calificacion").rateYo("rating"),
+                    comentarios: $("#comentarios").val(),
                 }),
                 cache: false,
                 dataType: "text",

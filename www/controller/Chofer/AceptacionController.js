@@ -171,6 +171,7 @@ myApp.onPageInit('ChoferAcepta', function(page) {
 			          }),
 			          cache: false,
 			          dataType: "text",
+			          async: false,
 			          success: function(data){
 			              var obj = $.parseJSON(data);
 			              $.each(obj.viaje, function(i,viaje){

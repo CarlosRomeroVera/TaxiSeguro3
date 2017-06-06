@@ -25,6 +25,7 @@ function salir(){
     var usuario = localStorage.getItem('User');
         if (usuario!==null) {
             if (window.tipo_usuario_global == '131ddd56-1ff1-11e7-80f1-34e6d76e4d35') {
+
                 $.ajax({
                     type: "POST", 
                     url:  window.server + "chofer/obtener_estado.php",
@@ -33,8 +34,11 @@ function salir(){
                     }),
                     cache: false,
                     dataType: "text",
+                    async: false,
                     success: function(data){
+
                         if (data == 'Estado: LIBRE') {
+
                             $.ajax({
                                 type: "POST", 
                                 url:  window.server + "chofer/cambiar_estado.php",
@@ -43,6 +47,7 @@ function salir(){
                                 }),
                                 cache: false,
                                 dataType: "text",
+                                async: false,
                                 success: function(data){
                                     //document.getElementById('info').innerHTML = data;
                                 }

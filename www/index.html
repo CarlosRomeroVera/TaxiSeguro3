@@ -43,7 +43,7 @@
         }
         #mapPasajeroComienzaViaje {
             width: 100%;
-            height: 85%;
+            height: 70%;
         }
         #mapPasajeroComienzaViajeAlter {
             width: 100%;
@@ -332,10 +332,12 @@
                                 dataType: "text",
                                 success: function(data){
                                     //document.getElementById('info').innerHTML = data;
+                                    clearInterval(refreshIntervalId);
+                                    myApp.closeModal('.popup-about')
+                                    mainView.router.loadPage('view/Chofer/Index.html');
                                 }
                             });//fin de ajax
-                            myApp.closeModal('.popup-about')
-                            mainView.router.loadPage('view/Chofer/Index.html');
+                            
                         }
                     }
                 }).fail( function() {
@@ -356,6 +358,7 @@
                     dataType: "text",
                     success: function(data){
                         if (data) {
+                            clearInterval(refreshIntervalId);
                             myApp.closeModal('.popup-pasajero')
                             mainView.router.loadPage('view/Viajes/Index.html');
                         }
