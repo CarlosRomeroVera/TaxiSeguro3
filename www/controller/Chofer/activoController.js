@@ -45,6 +45,9 @@ myApp.onPageInit('ChoferIndex', function(page) {
             if(document.getElementById('info').innerHTML == 'Estado: LIBRE') {
                 navigator.geolocation.getCurrentPosition(
                   function (position){
+                    if (position.coords.latitude == '' || position.coords.latitude == null) {
+                        alert('Porfavor, apaga y prende tu gps');
+                    }
                     coords =  position.coords.latitude + ',' + position.coords.longitude;
                     envia(coords);
                   },function(error){console.log(error);}

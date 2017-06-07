@@ -128,15 +128,30 @@ function checkState(){
             switch(statuses[permission]){
                 case cordova.plugins.diagnostic.permissionStatus.GRANTED:
                     //alert("Permission granted to use "+permission);
+                    cordova.plugins.diagnostic.isLocationAvailable(function(available){
+                        // $('#state .location').addClass(available ? 'on' : 'off');
+
+                        //alert('isLocationAvailable');
+                        var info = (available ? 'on' : 'off');
+                        //alert(info);
+                        if (info == 'off') {
+                            alert('Porfavor, enciende tu GPS');
+                            var info = (available ? 'on' : 'off');
+                            //alert(info);
+                            if (info == 'off') {
+                                cordova.plugins.diagnostic.switchToLocationSettings();
+                            }
+                        }
+                    }, onError);
                     break;
                 case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
-                    //alert("Permission to use "+permission+" has not been requested yet");
+                    alert("Permission to use "+permission+" has not been requested yet");
                     break;
                 case cordova.plugins.diagnostic.permissionStatus.DENIED:
-                    //alert("Permission denied to use "+permission+" - ask again?");
+                    alert("Permission denied to use "+permission+" - ask again?");
                     break;
                 case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
-                    //alert("Permission permanently denied to use "+permission+" - guess we won't be using it then!");
+                    alert("Permission permanently denied to use "+permission+" - guess we won't be using it then!");
                     break;
             }
         }
@@ -148,17 +163,17 @@ function checkState(){
     ]);
     // Location
     var onGetLocationAuthorizationStatus;
-    cordova.plugins.diagnostic.isLocationAvailable(function(available){
-        // $('#state .location').addClass(available ? 'on' : 'off');
+    // cordova.plugins.diagnostic.isLocationAvailable(function(available){
+    //     // $('#state .location').addClass(available ? 'on' : 'off');
 
-        //alert('isLocationAvailable');
-        var info = (available ? 'on' : 'off');
-        //alert(info);
-        if (info == 'off') {
-            alert('Porfavor, enciende tu GPS');
-            cordova.plugins.diagnostic.switchToLocationSettings();
-        }
-    }, onError);
+    //     //alert('isLocationAvailable');
+    //     var info = (available ? 'on' : 'off');
+    //     //alert(info);
+    //     if (info == 'off') {
+    //         alert('Porfavor, enciende tu GPS');
+    //         cordova.plugins.diagnostic.switchToLocationSettings();
+    //     }
+    // }, onError);
 
 
     if(platform === "ios"){
