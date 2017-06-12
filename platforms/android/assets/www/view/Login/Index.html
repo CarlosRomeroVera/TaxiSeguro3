@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <!-- Required meta tags-->
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+            <meta name="apple-mobile-web-app-capable" content="yes">
+            <meta name="apple-mobile-web-app-status-bar-style" content="black">
+            <meta name="format-detection" content="telephone=no">
+            <meta name="msapplication-tap-highlight" content="no">
+
+            <!-- Your app title -->
+            <title>Taxi Seguro</title>
+            <link rel="stylesheet" href="../../webroot/css/framework7.ios.min.css">
+            <link rel="stylesheet" href="../../webroot/css/framework7.ios.colors.min.css">
+            <link rel="stylesheet" href="../../webroot/css/framework7-icons.css">
+
+            <link rel="stylesheet" href="../../webroot/css/framework7.ios.min.css">
+            <link rel="stylesheet" href="../../webroot/css/framework7.ios.colors.min.css">
+            <link rel="stylesheet" href="../../webroot/css/framework7.3dpanels.css">
+
+            <link rel="stylesheet" href="../../webroot/css/styles.css">
+            <link rel="stylesheet" href="../../webroot/css/panel.css">
+            <link rel="stylesheet" href="../../webroot/css/loper.css">
+            <link rel="stylesheet" href="../../webroot/css/TimeCircles.css" />
+            <link rel="stylesheet" href="../../webroot/css/jquery.rateyo.min.css" />
+
+            <style>
+                #map {
+                    width: 100%;
+                    height: 98%;
+                }
+                #mapUbi {
+                    width: 100%;
+                    height: 95%;
+                }
+                #mapChoferAcepta {
+                    width: 100%;
+                    height: 89%;
+                }
+                #mapChoferComienzaViaje {
+                    width: 100%;
+                    height: 89%;
+                }
+                #mapPasajeroComienzaViaje {
+                    width: 100%;
+                    height: 89%;
+                }
+                #mapPasajeroComienzaViajeAlter {
+                    width: 100%;
+                    height: 80%;
+                }
+                #mapRuta {
+                    width: 100%;
+                    height: 97%;
+                }
+            </style>
+        </head>
+
+        <body>
+            <div class="statusbar-overlay"></div>
+            <div class="panel-overlay"></div>
+    
+            <div class="panel panel-left panel-reveal">
+                <div class="view">
+                    <div class="pages">
+                        <div class="page">
+                            <div class="page-content">
+                                <div class="list-block">
+                                    <ul>
+                                        <li>
+                                            <a href="javascript: cambiarPageGeneral('../Viajes/Index.html');" class="item-content item-link">
+                                            <div class="item-media"><i class="icon f7-icons">home</i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title panel-close">Inicio</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript: cambiarPage('../Pasajeros/ruta.html', 'casa');" class="item-content item-link">
+                                                <div class="item-media"><i class="icon f7-icons">forward</i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title panel-close">Ir a Casa</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript: cambiarPage('../Pasajeros/ruta.html', 'trabajo');" class="item-content item-link">
+                                                <div class="item-media"><i class="icon f7-icons">forward_fill</i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title panel-close">Ir al Trabajo</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <!-- <li>
+                                            <a href="#" class="item-content item-link">
+                                                <div class="item-media"><i class="icon f7-icons">gear</i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title panel-close">Configuración</div>
+                                                </div>
+                                            </a>
+                                        </li> -->
+                                        <li>
+                                            <a href="#" class="item-content item-link">
+                                                <div class="item-media"><i class="icon f7-icons">home</i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title panel-close" onclick="cambiarPage('../Pasajeros/ubicacion.html', 'casa');">Configurar Casa</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="item-content item-link">
+                                                <div class="item-media"><i class="icon f7-icons">bag_fill</i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title panel-close" onclick="cambiarPage('../Pasajeros/ubicacion.html', 'trabajo');">Configurar Trabajo</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="item-content item-link">
+                                                <div class="item-media"><i class="icon f7-icons">logout</i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title panel-close" onclick="salir();">Cerrar Sesión</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="views">
+                <div class="view view-main">
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <div class="center sliding">Iniciar Sesión</div>
+                        </div>
+                    </div>
+
+                    <div class="pages navbar-through toolbar-through">
+                        <div data-page="LoginIndex" class="page">
+                            <div class="page-content">
+                                <form id="LoginForm">
+                                    <div class="list-block">
+                                        <center><img src="../../webroot/img/logo-login.png" height="200" width="200"></center>
+                                    </div>
+                                    
+                                    <div class="list-block">
+                                        <li class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title label">Usuario</div>
+                                                <div class="item-input">
+                                                    <input type="text" name="usuario" id="usuario" placeholder="Usuario / Teléfono" required>
+                                                </div>
+                                            </div>
+                                        </li>
+                                            
+                                        <li class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title label">Contraseña</div>
+                                                <div class="item-input">
+                                                    <input type="password" name="contrasenia" id="contrasenia" placeholder="Contraseña" required>
+                                                </div>
+                                            </div>
+                                        </li>   
+                                    </div>
+
+                                    <div class="list-block">
+                                        <a href="#" id="IniciarSesion" name="IniciarSesion" class="button button-big button-fill form-from-data">Iniciar Sesión</a>
+                                    </div>
+                                </form>
+                                <br />
+                                <div class="list-block">
+                                    <center><a href="../Pasajeros/add.html">Crear Nuevo Usuario</a></center>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- <script type="text/javascript" src="../../webroot/js/ng-cordova.js"></script> -->
+            <!-- <script type="text/javascript" src="../../webroot/js/cordova.js"></script> -->
+            <!-- <script type="text/javascript" src="../../cordova.js"></script> -->
+            <script type="text/javascript" src="../../webroot/js/globals.js"></script>
+            <script type="text/javascript" src="../../webroot/js/jquery-2.2.0.js"></script>
+            <script type="text/javascript" src="../../webroot/helpers/TaxiSeguroUtilities.js"></script>
+            <script type="text/javascript" src="../../webroot/js/framework7.min.js"></script>
+            <script type="text/javascript" src="../../webroot/js/TimeCircles.js"></script>
+            <script type="text/javascript" src="../../webroot/js/jquery.rateyo.min.js"></script>
+
+            <script src="../../webroot/js/framework7.min.js"></script>
+            <script src="../../webroot/js/framework7.3dpanels.js"></script>
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9Wpp7_aZf8tQ_Nh2odQ6aZVb9tsFjFpo&libraries=geometry"></script>
+
+            <script type="text/javascript" src="../../controller/LoginController.js"></script>
+            <script type="text/javascript" src="../../controller/PasajeroController.js"></script>
+            <script type="text/javascript" src="../../controller/ViajeController.js"></script>
+            <script type="text/javascript" src="../../controller/Chofer/activoController.js"></script>
+            <script type="text/javascript" src="../../controller/Chofer/peticionController.js"></script>
+            <script type="text/javascript" src="../../controller/Chofer/AceptacionController.js"></script>
+            <script type="text/javascript" src="../../controller/Chofer/comienzaViajeController.js"></script>
+            <script type="text/javascript" src="../../controller/Chofer/terminaViajeController.js"></script>
+            <script type="text/javascript" src="../../controller/Pasajeros/EditController.js"></script>
+            <script type="text/javascript" src="../../controller/Pasajeros/UbicacionController.js"></script>
+            <script type="text/javascript" src="../../controller/Pasajeros/ViewController.js"></script>
+            <script type="text/javascript" src="../../controller/Pasajeros/terminaViajeController.js"></script>
+            <script type="text/javascript" src="../../controller/Pasajeros/comienzaViajeController.js"></script>
+            <script type="text/javascript" src="../../controller/Viajes/comienzaViajeController.js"></script>
+            <script type="text/javascript" src="../../controller/Viajes/rutaController.js"></script>
+            <script type="text/javascript">
+                function finalizaViaje() {
+                    $.ajax({
+                        type: "POST", 
+                        url:  window.server + "chofer/cambiar_estado_viaje.php",
+                        data: ({
+                            id: window.viaje_id,
+                            estado: 'finalizado'
+                        }),
+                        cache: false,
+                        dataType: "text",
+                        success: function(data){
+                            if (data) {
+                                clearInterval(refreshIntervalId);
+                                mainView.router.loadPage('../Chofer/terminaViaje.html');
+                            }else{
+                                myApp.alert("Error, verifica tu conexión e intenta de nuevo", "¡Atención!");
+                            }
+                            
+                        }
+                    });//fin de ajax
+                }
+            </script>
+        </body>
+    </html>
+

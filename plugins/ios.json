@@ -1,0 +1,30 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
+        },
+        "cordova-custom-config": {
+            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
+        },
+        "cordova.plugins.diagnostic": {
+            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
+        }
+    },
+    "dependent_plugins": {}
+}

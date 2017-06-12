@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="cordova.plugins.diagnostic.example" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <feature name="Camera">
+        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+    </feature>
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
+    <feature name="Geolocation">
+        <param name="android-package" value="org.apache.cordova.geolocation.Geolocation" />
+    </feature>
+    <feature name="Whitelist">
+        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Diagnostic">
+        <param name="android-package" value="cordova.plugins.Diagnostic" />
+        <param name="onload" value="true" />
+    </feature>
+    <name>Taxi Seguro</name>
+    <description>
+        App para administrar Taxis en Chetumal
+    </description>
+    <author email="romeroveracarlos@gmail.com" href="">
+        Dave Alden
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <config-file parent="/*" target="AndroidManifest.xml">
+        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+        <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    </config-file>
+    <icon density="ldpi" src="res/icon/android/logo-login.png" />
+    <icon density="mdpi" src="res/icon/android/logo-login.png" />
+    <icon density="hdpi" src="res/icon/android/logo-login.png" />
+    <icon density="xhdpi" src="res/icon/android/logo-login.png" />
+    <icon density="xxhdpi" src="res/icon/android/logo-login.png" />
+    <icon density="xxxhdpi" src="res/icon/android/logo-login.png" />
+    <preference name="loglevel" value="DEBUG" />
+    <preference name="Fullscreen" value="false" />
+    <preference name="phonegap-version" value="cli-6.4.0" />
+    <preference name="android-build-tool" value="gradle" />
+    <preference name="android-minSdkVersion" value="21" />
+    <preference name="android-targetSdkVersion" value="23" />
+</widget>
