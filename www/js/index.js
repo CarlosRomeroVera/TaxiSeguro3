@@ -1,8 +1,6 @@
 var platform;
 function onDeviceReady() {
 
-    grantedDevice = 0;
-
     platform = device.platform.toLowerCase();
     if(platform.match(/win/)){
         platform = "windows";
@@ -31,7 +29,6 @@ function onDeviceReady() {
                 switch(statuses[permission]){
                     case cordova.plugins.diagnostic.permissionStatus.GRANTED:
                         console.log("Permission granted to use "+permission);
-                        grantedDevice = 1;
                         break;
                     case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
                         console.log("Permission to use "+permission+" has not been requested yet");
@@ -125,6 +122,30 @@ function onDeviceReady() {
 
 
 function checkState(){
+
+    cordova.plugins.diagnostic.requestRuntimePermissions(function(statuses){
+        for (var permission in statuses){
+            switch(statuses[permission]){
+                case cordova.plugins.diagnostic.permissionStatus.GRANTED:
+                    //alert("Permission granted to use "+permission);
+                    break;
+                case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
+                    alert("Permission to use "+permission+" has not been requested yet");
+                    break;
+                case cordova.plugins.diagnostic.permissionStatus.DENIED:
+                    alert("Permission denied to use "+permission+" - ask again?");
+                    break;
+                case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
+                    alert("Permission permanently denied to use "+permission+" - guess we won't be using it then!");
+                    break;
+            }
+        }
+    }, function(error){
+        alert("The following error occurred: "+error);
+    },[
+        cordova.plugins.diagnostic.permission.ACCESS_FINE_LOCATION,
+        cordova.plugins.diagnostic.permission.ACCESS_COARSE_LOCATION
+    ]);
     // Location
     var onGetLocationAuthorizationStatus;
     cordova.plugins.diagnostic.isLocationAvailable(function(available){
@@ -133,7 +154,7 @@ function checkState(){
         //alert('isLocationAvailable');
         var info = (available ? 'on' : 'off');
         //alert(info);
-        if (info == 'off' && grantedDevice == 1) {
+        if (info == 'off') {
             alert('Porfavor, enciende tu GPS');
             cordova.plugins.diagnostic.switchToLocationSettings();
         }
