@@ -7,5 +7,5 @@ window.url = "https://taxiseguro2.local/";*/
 // window.server = "http://localhost/taxiSeguro2/php/";
 // window.url = "http://localhost/taxiSeguro2/";
 
-window.server = "https://pservices.sm2consultores.com/ptaxiseguro/php/";
-window.url = "https://pservices.sm2consultores.com/ptaxiseguro/";
+window.server = "https://services.sm2consultores.com/ptaxiseguro/php/";
+window.url = "https://services.sm2consultores.com/ptaxiseguro/";
