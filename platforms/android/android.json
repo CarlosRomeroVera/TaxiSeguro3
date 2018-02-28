@@ -1,163 +1,236 @@
 {
-    "prepare_queue": {
-        "installed": [],
-        "uninstalled": []
-    },
-    "config_munge": {
-        "files": {
-            "res/xml/config.xml": {
-                "parents": {
-                    "/*": [
-                        {
-                            "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Geolocation\"><param name=\"android-package\" value=\"org.apache.cordova.geolocation.Geolocation\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        }
-                    ]
-                }
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {
+      "app/src/main/AndroidManifest.xml": {
+        "parents": {
+          "/*": [
+            {
+              "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
+              "count": 15
             },
-            "AndroidManifest.xml": {
-                "parents": {
-                    "/*": [
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />",
-                            "count": 1
-                        }
-                    ],
-                    "/manifest/application": [
-                        {
-                            "xml": "<receiver android:name=\"cordova.plugins.Diagnostic$LocationProviderChangedReceiver\"><intent-filter><action android:name=\"android.location.PROVIDERS_CHANGED\" /></intent-filter></receiver>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<receiver android:name=\"cordova.plugins.Diagnostic$NFCStateChangedReceiver\"><intent-filter><action android:name=\"android.nfc.action.ADAPTER_STATE_CHANGED\" /></intent-filter></receiver>",
-                            "count": 1
-                        }
-                    ]
-                }
+            {
+              "xml": "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />",
+              "count": 15
             },
-            "config.xml": {
-                "parents": {
-                    "/*": [
-                        {
-                            "xml": "<feature name=\"Diagnostic\"><param name=\"android-package\" value=\"cordova.plugins.Diagnostic\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        }
-                    ]
-                }
+            {
+              "xml": "<uses-permission android:name=\"android.permission.ACCESS_LOCATION_EXTRA_COMMANDS\" />",
+              "count": 15
             }
+          ]
         }
-    },
-    "installed_plugins": {
-        "cordova-custom-config": {
-            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
-        },
-        "cordova-plugin-camera": {
-            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
-        },
-        "cordova-plugin-geolocation": {
-            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
-        },
-        "cordova.plugins.diagnostic": {
-            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
+      },
+      "res/xml/config.xml": {
+        "parents": {
+          "/*": [
+            {
+              "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"Geolocation\"><param name=\"android-package\" value=\"org.apache.cordova.geolocation.Geolocation\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"PushNotification\"><param name=\"android-package\" value=\"com.adobe.phonegap.push.PushPlugin\" /></feature>",
+              "count": 1
+            }
+          ]
         }
-    },
-    "dependent_plugins": {},
-    "modules": [
-        {
-            "id": "cordova-plugin-camera.Camera",
-            "file": "plugins/cordova-plugin-camera/www/CameraConstants.js",
-            "pluginId": "cordova-plugin-camera",
-            "clobbers": [
-                "Camera"
-            ]
-        },
-        {
-            "id": "cordova-plugin-camera.CameraPopoverOptions",
-            "file": "plugins/cordova-plugin-camera/www/CameraPopoverOptions.js",
-            "pluginId": "cordova-plugin-camera",
-            "clobbers": [
-                "CameraPopoverOptions"
-            ]
-        },
-        {
-            "id": "cordova-plugin-camera.camera",
-            "file": "plugins/cordova-plugin-camera/www/Camera.js",
-            "pluginId": "cordova-plugin-camera",
-            "clobbers": [
-                "navigator.camera"
-            ]
-        },
-        {
-            "id": "cordova-plugin-camera.CameraPopoverHandle",
-            "file": "plugins/cordova-plugin-camera/www/CameraPopoverHandle.js",
-            "pluginId": "cordova-plugin-camera",
-            "clobbers": [
-                "CameraPopoverHandle"
-            ]
-        },
-        {
-            "id": "cordova-plugin-device.device",
-            "file": "plugins/cordova-plugin-device/www/device.js",
-            "pluginId": "cordova-plugin-device",
-            "clobbers": [
-                "device"
-            ]
-        },
-        {
-            "id": "cordova-plugin-geolocation.geolocation",
-            "file": "plugins/cordova-plugin-geolocation/www/android/geolocation.js",
-            "pluginId": "cordova-plugin-geolocation",
-            "clobbers": [
-                "navigator.geolocation"
-            ]
-        },
-        {
-            "id": "cordova-plugin-geolocation.PositionError",
-            "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
-            "pluginId": "cordova-plugin-geolocation",
-            "runs": true
-        },
-        {
-            "id": "cordova.plugins.diagnostic.Diagnostic",
-            "file": "plugins/cordova.plugins.diagnostic/www/android/diagnostic.js",
-            "pluginId": "cordova.plugins.diagnostic",
-            "clobbers": [
-                "cordova.plugins.diagnostic"
-            ]
+      },
+      "AndroidManifest.xml": {
+        "parents": {
+          "/*": [
+            {
+              "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+              "count": 1
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
+              "count": 1
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />",
+              "count": 1
+            }
+          ],
+          "/manifest/application": [
+            {
+              "xml": "<receiver android:name=\"cordova.plugins.Diagnostic$LocationProviderChangedReceiver\"><intent-filter><action android:name=\"android.location.PROVIDERS_CHANGED\" /></intent-filter></receiver>",
+              "count": 1
+            },
+            {
+              "xml": "<receiver android:name=\"cordova.plugins.Diagnostic$NFCStateChangedReceiver\"><intent-filter><action android:name=\"android.nfc.action.ADAPTER_STATE_CHANGED\" /></intent-filter></receiver>",
+              "count": 1
+            },
+            {
+              "xml": "<activity android:exported=\"true\" android:name=\"com.adobe.phonegap.push.PushHandlerActivity\" android:permission=\"${applicationId}.permission.PushHandlerActivity\" />",
+              "count": 1
+            },
+            {
+              "xml": "<receiver android:name=\"com.adobe.phonegap.push.BackgroundActionButtonHandler\" />",
+              "count": 1
+            },
+            {
+              "xml": "<receiver android:name=\"com.adobe.phonegap.push.PushDismissedHandler\" />",
+              "count": 1
+            },
+            {
+              "xml": "<service android:name=\"com.adobe.phonegap.push.FCMService\"><intent-filter><action android:name=\"com.google.firebase.MESSAGING_EVENT\" /></intent-filter></service>",
+              "count": 1
+            },
+            {
+              "xml": "<service android:name=\"com.adobe.phonegap.push.PushInstanceIDListenerService\"><intent-filter><action android:name=\"com.google.firebase.INSTANCE_ID_EVENT\" /></intent-filter></service>",
+              "count": 1
+            }
+          ],
+          "/manifest": [
+            {
+              "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
+              "count": 1
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+              "count": 1
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.WAKE_LOCK\" />",
+              "count": 1
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.VIBRATE\" />",
+              "count": 1
+            }
+          ]
         }
-    ],
-    "plugin_metadata": {
-        "cordova-custom-config": "3.2.0",
-        "cordova-plugin-camera": "2.1.0",
-        "cordova-plugin-device": "1.1.6",
-        "cordova-plugin-geolocation": "2.1.0",
-        "cordova-plugin-whitelist": "1.3.2",
-        "cordova.plugins.diagnostic": "3.6.3"
+      },
+      "config.xml": {
+        "parents": {
+          "/*": [
+            {
+              "xml": "<feature name=\"Diagnostic\"><param name=\"android-package\" value=\"cordova.plugins.Diagnostic\" /><param name=\"onload\" value=\"true\" /></feature>",
+              "count": 1
+            }
+          ]
+        }
+      }
     }
+  },
+  "installed_plugins": {
+    "cordova-custom-config": {
+      "PACKAGE_NAME": "cordova.taxiseguro"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "cordova.taxiseguro"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "cordova.taxiseguro"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "cordova.taxiseguro"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "cordova.taxiseguro"
+    },
+    "cordova.plugins.diagnostic": {
+      "PACKAGE_NAME": "cordova.taxiseguro"
+    },
+    "phonegap-plugin-push": {
+      "FCM_VERSION": "11.0.1",
+      "PACKAGE_NAME": "cordova.taxiseguro"
+    }
+  },
+  "dependent_plugins": {},
+  "modules": [
+    {
+      "id": "cordova-plugin-camera.Camera",
+      "file": "plugins/cordova-plugin-camera/www/CameraConstants.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "Camera"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.CameraPopoverOptions",
+      "file": "plugins/cordova-plugin-camera/www/CameraPopoverOptions.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "CameraPopoverOptions"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.camera",
+      "file": "plugins/cordova-plugin-camera/www/Camera.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "navigator.camera"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.CameraPopoverHandle",
+      "file": "plugins/cordova-plugin-camera/www/CameraPopoverHandle.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "CameraPopoverHandle"
+      ]
+    },
+    {
+      "id": "cordova-plugin-device.device",
+      "file": "plugins/cordova-plugin-device/www/device.js",
+      "pluginId": "cordova-plugin-device",
+      "clobbers": [
+        "device"
+      ]
+    },
+    {
+      "id": "cordova-plugin-geolocation.geolocation",
+      "file": "plugins/cordova-plugin-geolocation/www/android/geolocation.js",
+      "pluginId": "cordova-plugin-geolocation",
+      "clobbers": [
+        "navigator.geolocation"
+      ]
+    },
+    {
+      "id": "cordova-plugin-geolocation.PositionError",
+      "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
+      "pluginId": "cordova-plugin-geolocation",
+      "runs": true
+    },
+    {
+      "id": "cordova.plugins.diagnostic.Diagnostic",
+      "file": "plugins/cordova.plugins.diagnostic/www/android/diagnostic.js",
+      "pluginId": "cordova.plugins.diagnostic",
+      "clobbers": [
+        "cordova.plugins.diagnostic"
+      ]
+    },
+    {
+      "id": "phonegap-plugin-push.PushNotification",
+      "file": "plugins/phonegap-plugin-push/www/push.js",
+      "pluginId": "phonegap-plugin-push",
+      "clobbers": [
+        "PushNotification"
+      ]
+    }
+  ],
+  "plugin_metadata": {
+    "cordova-custom-config": "3.2.0",
+    "cordova-plugin-camera": "2.1.0",
+    "cordova-plugin-device": "1.1.6",
+    "cordova-plugin-geolocation": "2.1.0",
+    "cordova-plugin-whitelist": "1.3.2",
+    "cordova.plugins.diagnostic": "3.6.3",
+    "phonegap-plugin-push": "2.1.1"
+  }
 }

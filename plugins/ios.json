@@ -1,30 +1,33 @@
 {
-    "prepare_queue": {
-        "installed": [],
-        "uninstalled": []
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-custom-config": {
+      "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
     },
-    "config_munge": {
-        "files": {}
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
     },
-    "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
-        },
-        "cordova-custom-config": {
-            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
-        },
-        "cordova-plugin-geolocation": {
-            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
-        },
-        "cordova-plugin-camera": {
-            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
-        },
-        "cordova.plugins.diagnostic": {
-            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
-        }
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
     },
-    "dependent_plugins": {}
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
+    },
+    "cordova.plugins.diagnostic": {
+      "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
+    },
+    "phonegap-plugin-push": {
+      "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
+    }
+  },
+  "dependent_plugins": {}
 }

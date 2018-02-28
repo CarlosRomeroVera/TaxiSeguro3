@@ -1,215 +1,261 @@
 {
-    "prepare_queue": {
-        "installed": [],
-        "uninstalled": []
-    },
-    "config_munge": {
-        "files": {
-            "config.xml": {
-                "parents": {
-                    "/*": [
-                        {
-                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Geolocation\"><param name=\"ios-package\" value=\"CDVLocation\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference name=\"CameraUsesGeolocation\" value=\"false\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Diagnostic\"><param name=\"ios-package\" value=\"Diagnostic\" /></feature>",
-                            "count": 1
-                        }
-                    ]
-                }
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {
+      "*-Info.plist": {
+        "parents": {
+          "UIBackgroundModes": [
+            {
+              "xml": "<array><string>fetch</string><string>remote-notification</string></array>",
+              "count": 2
             },
-            "*-Info.plist": {
-                "parents": {
-                    "NSLocationWhenInUseUsageDescription": [
-                        {
-                            "xml": "<string />",
-                            "count": 2
-                        },
-                        {
-                            "xml": "<string>This app requires access to your location when the screen is on and the app is displayed.</string>",
-                            "count": 1
-                        }
-                    ],
-                    "NSLocationAlwaysUsageDescription": [
-                        {
-                            "xml": "<string>This app requires constant access to your location in order to track your position, even when the screen is off.</string>",
-                            "count": 1
-                        }
-                    ],
-                    "NSCalendarsUsageDescription": [
-                        {
-                            "xml": "<string>This app requires calendar access to function properly.</string>",
-                            "count": 1
-                        }
-                    ],
-                    "NSPhotoLibraryUsageDescription": [
-                        {
-                            "xml": "<string>This app requires photo library access to function properly.</string>",
-                            "count": 1
-                        }
-                    ],
-                    "NSBluetoothPeripheralUsageDescription": [
-                        {
-                            "xml": "<string>This app requires bluetooth access to function properly.</string>",
-                            "count": 1
-                        }
-                    ],
-                    "NSMicrophoneUsageDescription": [
-                        {
-                            "xml": "<string>This app requires microphone access to function properly.</string>",
-                            "count": 1
-                        }
-                    ],
-                    "NSCameraUsageDescription": [
-                        {
-                            "xml": "<string>This app requires camera access to function properly.</string>",
-                            "count": 1
-                        }
-                    ],
-                    "NSMotionUsageDescription": [
-                        {
-                            "xml": "<string>This app requires motion detection access to function properly.</string>",
-                            "count": 1
-                        }
-                    ],
-                    "NSContactsUsageDescription": [
-                        {
-                            "xml": "<string>This app requires contacts access to function properly.</string>",
-                            "count": 1
-                        }
-                    ],
-                    "NSRemindersUsageDescription": [
-                        {
-                            "xml": "<string>This app requires reminders access to function properly.</string>",
-                            "count": 1
-                        }
-                    ]
-                }
+            {
+              "xml": "<array><string>remote-notification</string></array>",
+              "count": 1
             }
+          ],
+          "NSLocationWhenInUseUsageDescription": [
+            {
+              "xml": "<string />",
+              "count": 2
+            },
+            {
+              "xml": "<string>This app requires access to your location when the screen is on and the app is displayed.</string>",
+              "count": 1
+            }
+          ],
+          "NSLocationAlwaysUsageDescription": [
+            {
+              "xml": "<string>This app requires constant access to your location in order to track your position, even when the screen is off.</string>",
+              "count": 1
+            }
+          ],
+          "NSCalendarsUsageDescription": [
+            {
+              "xml": "<string>This app requires calendar access to function properly.</string>",
+              "count": 1
+            }
+          ],
+          "NSPhotoLibraryUsageDescription": [
+            {
+              "xml": "<string>This app requires photo library access to function properly.</string>",
+              "count": 1
+            }
+          ],
+          "NSBluetoothPeripheralUsageDescription": [
+            {
+              "xml": "<string>This app requires bluetooth access to function properly.</string>",
+              "count": 1
+            }
+          ],
+          "NSMicrophoneUsageDescription": [
+            {
+              "xml": "<string>This app requires microphone access to function properly.</string>",
+              "count": 1
+            }
+          ],
+          "NSCameraUsageDescription": [
+            {
+              "xml": "<string>This app requires camera access to function properly.</string>",
+              "count": 1
+            }
+          ],
+          "NSMotionUsageDescription": [
+            {
+              "xml": "<string>This app requires motion detection access to function properly.</string>",
+              "count": 1
+            }
+          ],
+          "NSContactsUsageDescription": [
+            {
+              "xml": "<string>This app requires contacts access to function properly.</string>",
+              "count": 1
+            }
+          ],
+          "NSRemindersUsageDescription": [
+            {
+              "xml": "<string>This app requires reminders access to function properly.</string>",
+              "count": 1
+            }
+          ]
         }
-    },
-    "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
-        },
-        "cordova-custom-config": {
-            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
-        },
-        "cordova-plugin-geolocation": {
-            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
-        },
-        "cordova-plugin-camera": {
-            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
-        },
-        "cordova.plugins.diagnostic": {
-            "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
+      },
+      "config.xml": {
+        "parents": {
+          "/*": [
+            {
+              "xml": "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<preference name=\"CameraUsesGeolocation\" value=\"false\" />",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"Geolocation\"><param name=\"ios-package\" value=\"CDVLocation\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"Diagnostic\"><param name=\"ios-package\" value=\"Diagnostic\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"PushNotification\"><param name=\"ios-package\" value=\"PushPlugin\" /></feature>",
+              "count": 1
+            }
+          ]
         }
-    },
-    "dependent_plugins": {},
-    "modules": [
-        {
-            "id": "cordova-plugin-device.device",
-            "file": "plugins/cordova-plugin-device/www/device.js",
-            "pluginId": "cordova-plugin-device",
-            "clobbers": [
-                "device"
-            ]
-        },
-        {
-            "id": "cordova-plugin-geolocation.Coordinates",
-            "file": "plugins/cordova-plugin-geolocation/www/Coordinates.js",
-            "pluginId": "cordova-plugin-geolocation",
-            "clobbers": [
-                "Coordinates"
-            ]
-        },
-        {
-            "id": "cordova-plugin-geolocation.PositionError",
-            "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
-            "pluginId": "cordova-plugin-geolocation",
-            "clobbers": [
-                "PositionError"
-            ]
-        },
-        {
-            "id": "cordova-plugin-geolocation.Position",
-            "file": "plugins/cordova-plugin-geolocation/www/Position.js",
-            "pluginId": "cordova-plugin-geolocation",
-            "clobbers": [
-                "Position"
-            ]
-        },
-        {
-            "id": "cordova-plugin-geolocation.geolocation",
-            "file": "plugins/cordova-plugin-geolocation/www/geolocation.js",
-            "pluginId": "cordova-plugin-geolocation",
-            "clobbers": [
-                "navigator.geolocation"
-            ]
-        },
-        {
-            "id": "cordova-plugin-camera.Camera",
-            "file": "plugins/cordova-plugin-camera/www/CameraConstants.js",
-            "pluginId": "cordova-plugin-camera",
-            "clobbers": [
-                "Camera"
-            ]
-        },
-        {
-            "id": "cordova-plugin-camera.CameraPopoverOptions",
-            "file": "plugins/cordova-plugin-camera/www/CameraPopoverOptions.js",
-            "pluginId": "cordova-plugin-camera",
-            "clobbers": [
-                "CameraPopoverOptions"
-            ]
-        },
-        {
-            "id": "cordova-plugin-camera.camera",
-            "file": "plugins/cordova-plugin-camera/www/Camera.js",
-            "pluginId": "cordova-plugin-camera",
-            "clobbers": [
-                "navigator.camera"
-            ]
-        },
-        {
-            "id": "cordova-plugin-camera.CameraPopoverHandle",
-            "file": "plugins/cordova-plugin-camera/www/ios/CameraPopoverHandle.js",
-            "pluginId": "cordova-plugin-camera",
-            "clobbers": [
-                "CameraPopoverHandle"
-            ]
-        },
-        {
-            "id": "cordova.plugins.diagnostic.Diagnostic",
-            "file": "plugins/cordova.plugins.diagnostic/www/ios/diagnostic.js",
-            "pluginId": "cordova.plugins.diagnostic",
-            "clobbers": [
-                "cordova.plugins.diagnostic"
-            ]
+      },
+      "*-Debug.plist": {
+        "parents": {
+          "aps-environment": [
+            {
+              "xml": "<string>development</string>",
+              "count": 1
+            }
+          ]
         }
-    ],
-    "plugin_metadata": {
-        "cordova-plugin-whitelist": "1.3.2",
-        "cordova-plugin-device": "1.1.6",
-        "cordova-custom-config": "3.2.0",
-        "cordova-plugin-geolocation": "2.1.0",
-        "cordova-plugin-camera": "2.1.0",
-        "cordova.plugins.diagnostic": "3.6.3"
+      },
+      "*-Release.plist": {
+        "parents": {
+          "aps-environment": [
+            {
+              "xml": "<string>production</string>",
+              "count": 1
+            }
+          ]
+        }
+      }
     }
+  },
+  "installed_plugins": {
+    "cordova-custom-config": {
+      "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
+    },
+    "cordova.plugins.diagnostic": {
+      "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
+    },
+    "phonegap-plugin-push": {
+      "PACKAGE_NAME": "cordova.plugins.diagnostic.example"
+    }
+  },
+  "dependent_plugins": {},
+  "modules": [
+    {
+      "id": "cordova-plugin-camera.Camera",
+      "file": "plugins/cordova-plugin-camera/www/CameraConstants.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "Camera"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.CameraPopoverOptions",
+      "file": "plugins/cordova-plugin-camera/www/CameraPopoverOptions.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "CameraPopoverOptions"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.camera",
+      "file": "plugins/cordova-plugin-camera/www/Camera.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "navigator.camera"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.CameraPopoverHandle",
+      "file": "plugins/cordova-plugin-camera/www/ios/CameraPopoverHandle.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "CameraPopoverHandle"
+      ]
+    },
+    {
+      "id": "cordova-plugin-device.device",
+      "file": "plugins/cordova-plugin-device/www/device.js",
+      "pluginId": "cordova-plugin-device",
+      "clobbers": [
+        "device"
+      ]
+    },
+    {
+      "id": "cordova-plugin-geolocation.Coordinates",
+      "file": "plugins/cordova-plugin-geolocation/www/Coordinates.js",
+      "pluginId": "cordova-plugin-geolocation",
+      "clobbers": [
+        "Coordinates"
+      ]
+    },
+    {
+      "id": "cordova-plugin-geolocation.PositionError",
+      "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
+      "pluginId": "cordova-plugin-geolocation",
+      "clobbers": [
+        "PositionError"
+      ]
+    },
+    {
+      "id": "cordova-plugin-geolocation.Position",
+      "file": "plugins/cordova-plugin-geolocation/www/Position.js",
+      "pluginId": "cordova-plugin-geolocation",
+      "clobbers": [
+        "Position"
+      ]
+    },
+    {
+      "id": "cordova-plugin-geolocation.geolocation",
+      "file": "plugins/cordova-plugin-geolocation/www/geolocation.js",
+      "pluginId": "cordova-plugin-geolocation",
+      "clobbers": [
+        "navigator.geolocation"
+      ]
+    },
+    {
+      "id": "cordova.plugins.diagnostic.Diagnostic",
+      "file": "plugins/cordova.plugins.diagnostic/www/ios/diagnostic.js",
+      "pluginId": "cordova.plugins.diagnostic",
+      "clobbers": [
+        "cordova.plugins.diagnostic"
+      ]
+    },
+    {
+      "id": "phonegap-plugin-push.PushNotification",
+      "file": "plugins/phonegap-plugin-push/www/push.js",
+      "pluginId": "phonegap-plugin-push",
+      "clobbers": [
+        "PushNotification"
+      ]
+    }
+  ],
+  "plugin_metadata": {
+    "cordova-custom-config": "3.2.0",
+    "cordova-plugin-camera": "2.1.0",
+    "cordova-plugin-device": "1.1.6",
+    "cordova-plugin-geolocation": "2.1.0",
+    "cordova-plugin-whitelist": "1.3.2",
+    "cordova.plugins.diagnostic": "3.6.3",
+    "phonegap-plugin-push": "2.1.1"
+  }
 }

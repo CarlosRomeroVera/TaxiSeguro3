@@ -1,0 +1,24 @@
+
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left sliding"><a href="#" class="back link"> <i class="icon icon-back"></i><span>Atrás</span></a></div>
+        <div class="center sliding">Taxi Seguro</div>
+        <div class="right">
+            <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="pages">
+    <div data-page="PasajeroUbicacion" class="page">
+
+        <div class="page-content">
+            <div id="mapRuta"></div>
+            <div id="cargaRuta" style="z-index: 999999; top: -300px; position: relative; background-color: #FFF; width: auto; height: auto;"></div>
+            <input type="hidden" name="tipo" value="" id="tipoRuta">
+              
+            <input type="hidden" id="costoRuta" name="costo" />
+            <br><input type="submit" value="Solicitar" name="guardar" id="solicitarRuta" class="button button-big button-fill color-green form-from-data">
+        </div>
+    </div>
+</div>

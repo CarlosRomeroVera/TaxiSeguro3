@@ -4,8 +4,8 @@
     "displayName": "Diagnostic plugin example",
     "cordova": {
         "platforms": [
-            "android",
-            "ios"
+            "ios",
+            "android"
         ],
         "plugins": {
             "cordova-custom-config": {},
@@ -13,17 +13,21 @@
             "cordova-plugin-device": {},
             "cordova-plugin-geolocation": {},
             "cordova-plugin-whitelist": {},
-            "cordova.plugins.diagnostic": {}
+            "cordova.plugins.diagnostic": {},
+            "phonegap-plugin-push": {
+                "SENDER_ID": "1:919803510041:android:2a8d89da3701ab84"
+            }
         }
     },
     "dependencies": {
-        "cordova-ios": "~4.4.0",
+        "cordova-android": "^7.0.0",
         "cordova-custom-config": "*",
+        "cordova-ios": "^4.5.4",
         "cordova-plugin-camera": "2.1.0",
         "cordova-plugin-device": "*",
         "cordova-plugin-geolocation": "2.1.0",
         "cordova-plugin-whitelist": "*",
         "cordova.plugins.diagnostic": "*",
-        "cordova-android": "~6.2.3"
+        "phonegap-plugin-push": "^2.1.1"
     }
 }

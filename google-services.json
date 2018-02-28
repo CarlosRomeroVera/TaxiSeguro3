@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "3477556471",
+    "firebase_url": "https://taxiseguro-938ec.firebaseio.com",
+    "project_id": "taxiseguro-938ec",
+    "storage_bucket": "taxiseguro-938ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3477556471:android:2a8d89da3701ab84",
+        "android_client_info": {
+          "package_name": "cordova.taxiseguro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "3477556471-h0ovho8ffnntnbui9dirc3lj6hcr8kik.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADPn3fyHH41AN2k5_7YEkncNOgZwb1UGM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

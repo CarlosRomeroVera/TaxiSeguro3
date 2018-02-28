@@ -1,4 +1,5 @@
 myApp.onPageInit('ViajesIndex', function(page) { 
+
     var x = 0;
     //alert('entrando viajes');
     var marker;          //variable del marcador
@@ -937,4 +938,97 @@ myApp.onPageInit('ViajesIndex', function(page) {
     });//fin de clic solicitar
 
     initMap();
+
+    $$('#panico').on('click', function(){
+      myApp.confirm('Ocupas pedir auxilio?', 'Panico', function () {
+        // myApp.alert('Great!');
+        var ids = [];
+        navigator.geolocation.getCurrentPosition(
+          function (position){
+            coords =  {
+              lng: position.coords.longitude,
+              lat: position.coords.latitude
+            };
+            //alert(coords);
+            panico(coords);  //pasamos las coordenadas al metodo para crear el mapa
+            
+          
+          },function(error){alert(error);});
+
+
+        
+      });
+    });
+
+    function panico(coords){
+      $.ajax({
+          type: "POST", 
+          url:  window.server + "pasajeros/panico.php",
+          data: ({
+              id : window.user_id_global,
+              uuid : generateUUID(),
+              lat : coords.lat,
+              lng : coords.lng,
+          }),
+        
+          cache: false,
+          dataType: "text",
+          success: function(data){
+            if (data != 'Error') {
+              var parsed = JSON.parse(data);
+
+              //var arr = [];
+
+              for(var x in parsed){
+                ids.push(parsed[x].gcm_regid);
+              }
+
+              //alert(ids);
+              $.ajax({
+                type: "POST", 
+                url:  window.server + "pasajeros/obtener_detalles.php",
+                data: ({
+                    id : window.user_id_global
+                }),
+              
+                cache: false,
+                dataType: "text",
+                async: false,
+                success: function(data){
+                  if (data != 'Error') {                    
+                    envia(ids, data);
+                  }
+                }
+              });//fin de ajax
+
+              // envia(ids);
+            }
+          }
+        }).fail( function() {
+
+            //alert( 'Comprueba tu conexión a internet e intenta de nuevo' );
+            // clearInterval(solicitudInterval);
+            myApp.alert('Comprueba tu conexión a internet', '¡Atención!');
+            // mainView.router.loadPage('view/Viajes/Index.html');
+        });//fin de ajax
+    }
+
+    function envia(ids, nombre){
+      $.ajax({
+          type : 'POST',
+          url : "https://fcm.googleapis.com/fcm/send",
+          headers : {
+              Authorization : 'key=' + 'AAAAAM9HTPc:APA91bGjssng9EoR-ypbdWG4nBp9Sa0e9lI4Ph3gEnqjz1nl9Fz6ml64PfHFVy5FbwuxtnYUZRWLwIk_eyQ8X9b5YsVOj-itFeHucLBm6ZInDA8DgQ1Bp3Qt5WAiFzwCgXBTQjM01-Uu'
+          },
+          contentType : 'application/json',
+          dataType: 'json',
+          data: JSON.stringify({"registration_ids": ids, "notification": {"title":"Auxilio!","body":nombre+" acaba de presionar el boton de panico!","sound":"default"}}),
+          success : function(response) {
+              console.log(response);
+          },
+          error : function(xhr, status, error) {
+              console.log(xhr.error);
+          }
+      });
+    }
 });

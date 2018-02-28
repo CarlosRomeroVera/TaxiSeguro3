@@ -27,7 +27,7 @@
     <style>
         #map {
             width: 100%;
-            height: 98%;
+            height: 93%;
         }
         #mapUbi {
             width: 100%;
@@ -108,7 +108,23 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" class="item-content item-link">
+                                        <a href="javascript: cambiarPageGeneral('view/Chofer/Contactos.html');" class="item-content item-link">
+                                            <div class="item-media"><i class="icon f7-icons">book_fill</i></div>
+                                            <div class="item-inner">
+                                                <div class="item-title panel-close" onclick="cambiarPage('view/Chofer/Contactos.html', 'trabajo');">Contactos</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript: cambiarPageGeneral('view/Pasajeros/ayuda.html');" class="item-content item-link">
+                                            <div class="item-media"><i class="icon f7-icons">info_fill</i></div>
+                                            <div class="item-inner">
+                                                <div class="item-title panel-close" onclick="cambiarPage('view/Pasajeros/ayuda.html', 'trabajo');">Contactos en peligro</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript: salir();" class="item-content item-link">
                                             <div class="item-media"><i class="icon f7-icons">logout</i></div>
                                             <div class="item-inner">
                                                 <div class="item-title panel-close" onclick="salir();">Cerrar Sesión</div>
@@ -208,6 +224,10 @@
         <!-- <script type="text/javascript" src="webroot/js/ng-cordova.js"></script> -->
         <!-- <script type="text/javascript" src="webroot/js/cordova.js"></script> -->
         <!-- <script type="text/javascript" src="cordova.js"></script> -->
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="phonegap.js"></script>
+        <script type="text/javascript" src="PushNotification.js"></script>
+        
         <script type="text/javascript" src="webroot/js/globals.js"></script>
         <script type="text/javascript" src="webroot/js/jquery-2.2.0.js"></script>
         <script type="text/javascript" src="webroot/helpers/TaxiSeguroUtilities.js"></script>
@@ -227,13 +247,22 @@
         <script type="text/javascript" src="controller/Chofer/AceptacionController.js"></script>
         <script type="text/javascript" src="controller/Chofer/comienzaViajeController.js"></script>
         <script type="text/javascript" src="controller/Chofer/terminaViajeController.js"></script>
+        <script type="text/javascript" src="controller/Chofer/BuscadorController.js"></script>
+        <script type="text/javascript" src="controller/Chofer/detallesController.js"></script>
         <script type="text/javascript" src="controller/Pasajeros/EditController.js"></script>
         <script type="text/javascript" src="controller/Pasajeros/UbicacionController.js"></script>
         <script type="text/javascript" src="controller/Pasajeros/ViewController.js"></script>
         <script type="text/javascript" src="controller/Pasajeros/terminaViajeController.js"></script>
         <script type="text/javascript" src="controller/Pasajeros/comienzaViajeController.js"></script>
+        <script type="text/javascript" src="controller/Pasajeros/BuscadorNuevoContacto.js"></script>
+        <script type="text/javascript" src="controller/Pasajeros/BuscadorContactoDeController.js"></script>
+        <script type="text/javascript" src="controller/Pasajeros/detallesController.js"></script>
+        <script type="text/javascript" src="controller/Pasajeros/detallesContactoDe.js"></script>
+        <script type="text/javascript" src="controller/Pasajeros/BuscadorContactoPeligroController.js"></script>
         <script type="text/javascript" src="controller/Viajes/comienzaViajeController.js"></script>
         <script type="text/javascript" src="controller/Viajes/rutaController.js"></script>
+
+        
         <script type="text/javascript">
             function finalizaViaje() {
                 $.ajax({
@@ -367,6 +396,106 @@
                     myApp.alert('Comprueba tu conexión a internet e intenta de nuevo', '¡Atención!');
 
                 });//fin de ajax
+            }
+
+            function asignaId(id){
+                window.resultado_id = id;
+            }
+
+            function actualizar(){
+              //alert('ok');
+                      myApp.showPreloader('Cargando...')
+                        setTimeout(function () {
+                            myApp.hidePreloader();
+                        }, 2000);
+                      $("#buscar").val('');
+                      var value = '';
+                        $.ajax({
+                    type: 'POST', 
+                    url:  window.server + 'buscador.php',
+                    data:   ({
+                                match: value,
+                                user_id: window.user_id_global
+                            }),
+                    cache: false,
+                    dataType: 'text',
+                    success: function(data){
+                        
+                        if(data == ''){
+                            $("#results").empty();
+                            // alert('ok');
+                        }else if(data != 'error'){
+                            var obj = $.parseJSON(data);
+                            //alert(obj.funcionario.length);
+                            
+                            var html = '';
+                            $.each(obj, function(i,contacto){
+                                html = html + "<li>";
+                                    html = html + "<a href='view/Chofer/detail.html' onclick='asignaId("+'"'+contacto.id+'"'+");' class='item-link item-content' id='cl'> ";
+                                    html = html + "<div class='item-inner'>";
+                                        html = html + "<div class='item-title-row'>";
+                                            html = html + "<div class='item-title'>" + contacto.nombre + ' ' + contacto.apellido + "</div>";
+                                        html = html + "</div>";
+                                        html = html + "<div class='item-after'>" + contacto.telefono +"</div>";
+                                    html = html + "</div>";
+                                    html = html + "</a>";
+                                html = html + "</li>";
+                            });
+                            $("#results").html(html);
+                        }
+                        
+                        else{
+                            myApp.alert('Verifique conexión e intente de nuevo', '¡Atención!');
+                        }
+                    }
+                });//fin de ajax
+            }
+
+            function actualizarContactoDe(){
+              //alert('ok');
+                      myApp.showPreloader('Cargando...')
+                        setTimeout(function () {
+                            myApp.hidePreloader();
+                        }, 2000);
+                      $("#buscarContactoDe").val('');
+                      var value = '';
+                        $.ajax({
+                            type: 'POST', 
+                            url:  window.server + 'buscadorContactoDe.php',
+                            data:   ({
+                                        match: value,
+                                        user_id: window.user_id_global
+                                    }),
+                            cache: false,
+                            dataType: 'text',
+                            success: function(data){
+                                
+                                if(data == ''){
+                                    $("#resultsContactoDe").empty();
+                                    // alert('ok');
+                                }else if(data != 'error'){
+                                    var obj = $.parseJSON(data);
+                                    //alert(obj.funcionario.length);
+                                    var html = '';
+                                    $.each(obj, function(i,contacto){
+                                        html = html + "<li>";
+                                            html = html + "<a href='view/Pasajeros/detailContactoDe.html' onclick='asignaId("+'"'+contacto.id+'"'+");' class='item-link item-content' id='cl'> ";
+                                            html = html + "<div class='item-inner'>";
+                                                html = html + "<div class='item-title-row'>";
+                                                    html = html + "<div class='item-title'>" + contacto.nombre + ' ' + contacto.apellido + "</div>";
+                                                html = html + "</div>";
+                                                html = html + "<div class='item-after'>" + contacto.telefono +"</div>";
+                                            html = html + "</div>";
+                                            html = html + "</a>";
+                                        html = html + "</li>";
+                                    });
+                                    $("#resultsContactoDe").html(html);
+                                }
+                                else{
+                                    myApp.alert('Verifique conexión e intente de nuevo', '¡Atención!');
+                                }
+                            }
+                        });//fin de ajax
             }
         </script>
 </body>

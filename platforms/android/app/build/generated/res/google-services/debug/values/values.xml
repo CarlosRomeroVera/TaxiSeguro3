@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">3477556471-h0ovho8ffnntnbui9dirc3lj6hcr8kik.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://taxiseguro-938ec.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">3477556471</string>
+    <string name="google_api_key" translatable="false">AIzaSyADPn3fyHH41AN2k5_7YEkncNOgZwb1UGM</string>
+    <string name="google_app_id" translatable="false">1:3477556471:android:2a8d89da3701ab84</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyADPn3fyHH41AN2k5_7YEkncNOgZwb1UGM</string>
+    <string name="google_storage_bucket" translatable="false">taxiseguro-938ec.appspot.com</string>
+</resources>

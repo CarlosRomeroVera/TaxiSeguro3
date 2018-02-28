@@ -8,418 +8,366 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
-    <style type="text/css">
-        body,
-        ul{
-            padding: 0;
-            margin: 0;
-        }
 
-        body.ios{
-            margin-top: 20px;
-        }
+    <title>Taxi Seguro</title>
+    <link rel="stylesheet" href="webroot/css/framework7.ios.min.css">
+    <link rel="stylesheet" href="webroot/css/framework7.ios.colors.min.css">
+    <link rel="stylesheet" href="webroot/css/framework7-icons.css">
 
-        body:not(.android) .android-only,
-        body:not(.ios) .ios-only,
-        body:not(.windows) .windows-only{
-            display: none;
-        }
+    <link rel="stylesheet" href="webroot/css/framework7.ios.min.css">
+    <link rel="stylesheet" href="webroot/css/framework7.ios.colors.min.css">
+    <link rel="stylesheet" href="webroot/css/framework7.3dpanels.css">
 
-        .os-conditional,
-        .settings button.os-conditional{
-            display: none;
-        }
+    <link rel="stylesheet" href="webroot/css/styles.css">
+    <link rel="stylesheet" href="webroot/css/panel.css">
+    <link rel="stylesheet" href="webroot/css/loper.css">
+    <link rel="stylesheet" href="webroot/css/TimeCircles.css" />
+    <link rel="stylesheet" href="webroot/css/jquery.rateyo.min.css" />
 
-        body.android .os-conditional.android,
-        body.ios .os-conditional.ios,
-        body.windows .os-conditional.windows,
-        body.android .settings button.os-conditional.android,
-        body.ios .settings button.os-conditional.ios,
-        body.windows .settings button.os-conditional.windows{
-            display: block;
-        }
-
-
-        h2{
-            text-align: center;
-            margin-top: 0;
-            padding-top: 0;
-        }
-        li{
-            list-style: none;
-            clear: right;
-            padding: 0;
-            margin: 12px 0 0 4px;
-        }
-        li span.name{
-
-        }
-        li span.state,
-        li span.value{
-            float: right;
-            padding: 2px;
-        }
-        li span.on{
-            background-color: green;
-        }
-        li span.off{
-            background-color: red;
-        }
-
-        li span.on,
-        li.off span.on,
-        li.on span.off{
-            display: none;
-        }
-
-        li.on span.on{
-            display: list-item !important;
-        }
-
-        .settings{
-            border-top: 1px solid #000;
-            margin-top: 24px;
-            padding-top: 24px;
+    <style>
+        #map {
             width: 100%;
+            height: 98%;
         }
-
-        .settings button{
-            display: block;
-            margin: 0 auto;
-            margin-bottom: 24px;
-        }
-
-        .disabled{
-            color: #cccccc;
-        }
-
-        #request-external-sd-details-results{
-            display: none;
-            margin-top: 12px;
-            border-top: 1px solid #000;
+        #mapUbi {
             width: 100%;
-            word-break: break-word;
+            height: 95%;
         }
-        #request-external-sd-details-results p{
-            padding: 12px;
+        #mapChoferAcepta {
+            width: 100%;
+            height: 85%;
         }
-        #write-external-sd-file{
-            display: none;
+        #mapChoferComienzaViaje {
+            width: 100%;
+            height: 85%;
+        }
+        #mapPasajeroComienzaViaje {
+            width: 100%;
+            height: 70%;
+        }
+        #mapPasajeroComienzaViajeAlter {
+            width: 100%;
+            height: 75%;
+        }
+        #mapRuta {
+            width: 100%;
+            height: 97%;
         }
     </style>
+
 </head>
 <body>
-<h2>State</h2>
+    <div class="statusbar-overlay"></div>
+        <div class="panel-overlay"></div>
 
-<div id="state">
-    <h3>Location</h3>
-    <ul>
-        <li class="location">
-            <span class="name">Location</span>
-            <span class="state on">AVAILABLE</span>
-            <span class="state off">UNAVAILABLE</span>
-        </li>
-        <li class="location-setting os-conditional android ios">
-            <span class="name">Location setting</span>
-            <span class="state on">ENABLED</span>
-            <span class="state off">DISABLED</span>
-        </li>
-        <li class="gps-location android-only">
-            <span class="name">GPS Location</span>
-            <span class="state on">AVAILABLE</span>
-            <span class="state off">UNAVAILABLE</span>
-        </li>
-        <li class="gps-location-setting android-only">
-            <span class="name">GPS Location setting</span>
-            <span class="state on">ENABLED</span>
-            <span class="state off">DISABLED</span>
-        </li>
-        <li class="network-location android-only">
-            <span class="name">Network Location</span>
-            <span class="state on">AVAILABLE</span>
-            <span class="state off">UNAVAILABLE</span>
-        </li>
-        <li class="network-location-setting android-only">
-            <span class="name">Network Location setting</span>
-            <span class="state on">ENABLED</span>
-            <span class="state off">DISABLED</span>
-        </li>
-        <li class="location-mode android-only">
-            <span class="name">Location Mode</span>
-            <span class="value"></span>
-        </li>
-        <li class="location-authorization os-conditional android ios">
-            <span class="name">Location authorized</span>
-            <span class="state on">AUTHORIZED</span>
-            <span class="state off">UNAUTHORIZED</span>
-        </li>
-        <li class="location-authorization-status os-conditional android ios">
-            <span class="name">Location authorization status</span>
-            <span class="value"></span>
-        </li>
-    </ul>
-    <h3>Camera</h3>
-    <ul>
-        <li class="camera">
-            <span class="name">Camera</span>
-            <span class="state on">AVAILABLE</span>
-            <span class="state off">UNAVAILABLE</span>
-        </li>
-        <li class="camera-present os-conditional android ios">
-            <span class="name">Camera present?</span>
-            <span class="state on">PRESENT</span>
-            <span class="state off">NOT PRESENT</span>
-        </li>
-        <li class="camera-authorized os-conditional android ios">
-            <span class="name">Camera authorized?</span>
-            <span class="state on">AUTHORIZED</span>
-            <span class="state off">UNAUTHORIZED</span>
-        </li>
-        <li class="camera-authorization-status os-conditional android ios">
-            <span class="name">Camera authorization status</span>
-            <span class="value"></span>
-        </li>
-        <li class="camera-roll-authorized ios-only">
-            <span class="name">Camera Roll authorized?</span>
-            <span class="state on">AUTHORIZED</span>
-            <span class="state off">UNAUTHORIZED</span>
-        </li>
-        <li class="camera-roll-authorization-status ios-only">
-            <span class="name">Camera Roll authorization status</span>
-            <span class="value"></span>
-        </li>
-    </ul>
-    <h3>WiFi</h3>
-    <ul>
-        <li class="wifi">
-            <span class="name">WiFi</span>
-            <span class="state on">AVAILABLE</span>
-            <span class="state off">UNAVAILABLE</span>
-        </li>
-        <li class="wifi-setting">
-            <span class="name">WiFi setting</span>
-            <span class="state on">ENABLED</span>
-            <span class="state off">DISABLED</span>
-        </li>
-    </ul>
-    <h3>Bluetooth</h3>
-    <ul>
-        <li class="bluetooth-support android-only">
-            <span class="name">Bluetooth</span>
-            <span class="state on">SUPPORTED</span>
-            <span class="state off">UNSUPPORTED</span>
-        </li>
-        <li class="bluetooth-available">
-            <span class="name">Bluetooth</span>
-            <span class="state on">AVAILABLE</span>
-            <span class="state off">UNAVAILABLE</span>
-        </li>
-        <li class="bluetooth-setting android-only">
-            <span class="name">Bluetooth setting</span>
-            <span class="state on">ENABLED</span>
-            <span class="state off">DISABLED</span>
-        </li>
-        <li class="bluetooth-state os-conditional android ios">
-            <span class="name">Bluetooth state</span>
-            <span class="value"></span>
-        </li>
-        <li class="bluetooth-le-support android-only">
-            <span class="name">Bluetooth Low Energy (LE)</span>
-            <span class="state on">SUPPORTED</span>
-            <span class="state off">UNSUPPORTED</span>
-        </li>
-        <li class="bluetooth-le-peripheral-support android-only">
-            <span class="name">Bluetooth LE Peripheral Mode</span>
-            <span class="state on">SUPPORTED</span>
-            <span class="state off">UNSUPPORTED</span>
-        </li>
-    </ul>
-    <div class="microphone os-conditional android ios">
-        <h3>Microphone</h3>
-        <ul>
-            <li class="microphone-authorized">
-                <span class="name">Microphone authorized?</span>
-                <span class="state on">AUTHORIZED</span>
-                <span class="state off">UNAUTHORIZED</span>
-            </li>
-            <li class="microphone-authorization-status">
-                <span class="name">Microphone authorization status</span>
-                <span class="value"></span>
-            </li>
-        </ul>
-    </div>
-    <div class="contacts os-conditional android ios">
-        <h3>Contacts (Address Book)</h3>
-        <ul>
-            <li class="contacts-authorized">
-                <span class="name">Contacts authorized?</span>
-                <span class="state on">AUTHORIZED</span>
-                <span class="state off">UNAUTHORIZED</span>
-            </li>
-            <li class="contacts-authorization-status">
-                <span class="name">Contacts authorization status</span>
-                <span class="value"></span>
-            </li>
-        </ul>
-    </div>
-    <div class="calendar os-conditional android ios">
-        <h3>Calendar</h3>
-        <ul>
-            <li class="calendar-authorized">
-                <span class="name">Calendar authorized?</span>
-                <span class="state on">AUTHORIZED</span>
-                <span class="state off">UNAUTHORIZED</span>
-            </li>
-            <li class="calendar-authorization-status">
-                <span class="name">Calendar authorization status</span>
-                <span class="value"></span>
-            </li>
-        </ul>
-    </div>
-    <div class="reminders ios-only">
-        <h3>Reminders</h3>
-        <ul>
-            <li class="reminders-authorized">
-                <span class="name">Reminders authorized?</span>
-                <span class="state on">AUTHORIZED</span>
-                <span class="state off">UNAUTHORIZED</span>
-            </li>
-            <li class="reminders-authorization-status">
-                <span class="name">Reminders authorization status</span>
-                <span class="value"></span>
-            </li>
-        </ul>
-    </div>
-    <div class="background-refresh ios-only">
-        <h3>Background refresh</h3>
-        <ul>
-            <li class="background-refresh-authorized">
-                <span class="name">Background refresh authorized?</span>
-                <span class="state on">AUTHORIZED</span>
-                <span class="state off">UNAUTHORIZED</span>
-            </li>
-            <li class="background-refresh-authorization-status">
-                <span class="name">Background refresh authorization status</span>
-                <span class="value"></span>
-            </li>
-        </ul>
-    </div>
-    <div class="remote-notifications ios-only">
-        <h3>Remote notifications</h3>
-        <ul>
-            <li class="remote-notifications-enabled">
-                <span class="name">Remote notifications enabled?</span>
-                <span class="state on">ENABLED</span>
-                <span class="state off">DISABLED</span>
-            </li>
-            <li class="remote-notifications-registered">
-                <span class="name">Registered for remote notifications?</span>
-                <span class="state on">REGISTERED</span>
-                <span class="state off">NOT REGISTERED</span>
-            </li>
-            <li class="remote-notifications-types">
-                <span class="name">Remote notifications types</span>
-                <span class="value"></span>
-            </li>
-        </ul>
-    </div>
-    <div class="motion ios-only">
-        <h3>Motion</h3>
-        <ul>
-            <li class="motion-available">
-                <span class="name">Motion tracking?</span>
-                <span class="state on">AVAILABLE</span>
-                <span class="state off">UNAVAILABLE</span>
-            </li>
-            <li class="motion-request-outcome-available">
-                <span class="name">Motion tracking request outcome?</span>
-                <span class="state on">AVAILABLE</span>
-                <span class="state off">UNAVAILABLE</span>
-            </li>
-            <li class="motion-authorization-status">
-                <span class="name">Motion authorization status</span>
-                <span class="value">UNKNOWN</span>
-            </li>
-        </ul>
-    </div>
-    <div class="nfc android-only">
-        <h3>NFC</h3>
-        <ul>
-            <li class="nfc-available">
-                <span class="name">NFC</span>
-                <span class="state on">AVAILABLE</span>
-                <span class="state off">UNAVAILABLE</span>
-            </li>
-            <li class="nfc-present">
-                <span class="name">NFC hardware</span>
-                <span class="state on">PRESENT</span>
-                <span class="state off">NOT PRESENT</span>
-            </li>
-            <li class="nfc-enabled">
-                <span class="name">NFC setting</span>
-                <span class="state on">ENABLED</span>
-                <span class="state off">DISABLED</span>
-            </li>
-        </ul>
-    </div>
-    <div class="external-sd android-only">
-        <h3>External SD card</h3>
-        <ul>
-            <li class="external-sd-authorized">
-                <span class="name">External SD card authorized?</span>
-                <span class="state on">AUTHORIZED</span>
-                <span class="state off">UNAUTHORIZED</span>
-            </li>
-            <li class="external-sd-authorization-status">
-                <span class="name">External SD card authorization status</span>
-                <span class="value"></span>
-            </li>
-        </ul>
-    </div>
-</div>
+        <div class="panel panel-left panel-reveal">
+            <div class="view">
+                <div class="pages">
+                    <div class="page">
+                        <div class="page-content">
+                            <div class="list-block">
+                                <ul>
+                                    <li>
+                                        <a href="javascript: cambiarPageGeneral('view/Viajes/Index.html');" class="item-content item-link">
+                                        <div class="item-media"><i class="icon f7-icons">home</i></div>
+                                            <div class="item-inner">
+                                                <div class="item-title panel-close">Inicio</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript: cambiarPage('view/Pasajeros/ruta.html', 'casa');" class="item-content item-link">
+                                            <div class="item-media"><i class="icon f7-icons">forward</i></div>
+                                            <div class="item-inner">
+                                                <div class="item-title panel-close">Ir a Casa</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript: cambiarPage('view/Pasajeros/ruta.html', 'trabajo');" class="item-content item-link">
+                                            <div class="item-media"><i class="icon f7-icons">forward_fill</i></div>
+                                            <div class="item-inner">
+                                                <div class="item-title panel-close">Ir al Trabajo</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="item-content item-link">
+                                            <div class="item-media"><i class="icon f7-icons">home</i></div>
+                                            <div class="item-inner">
+                                                <div class="item-title panel-close" onclick="cambiarPage('view/Pasajeros/ubicacion.html', 'casa');">Configurar Casa</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="item-content item-link">
+                                            <div class="item-media"><i class="icon f7-icons">bag_fill</i></div>
+                                            <div class="item-inner">
+                                                <div class="item-title panel-close" onclick="cambiarPage('view/Pasajeros/ubicacion.html', 'trabajo');">Configurar Trabajo</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="item-content item-link">
+                                            <div class="item-media"><i class="icon f7-icons">logout</i></div>
+                                            <div class="item-inner">
+                                                <div class="item-title panel-close" onclick="salir();">Cerrar Sesión</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<div class="settings">
-    <button id="do-check">Re-check state</button>
+        <div class="panel panel-right panel-cover panel-reveal">
+            <div class="view">
+                <div class="pages">
+                    <div class="page">
+                        <div class="page-content">
+                            <div class="list-block">
+                                <ul>
+                                    <li>
+                                        <a href="javascript: cambiarPageGeneral('view/Chofer/Index.html');" class="item-content item-link">
+                                        <div class="item-media"><i class="icon f7-icons">home</i></div>
+                                            <div class="item-inner">
+                                                <div class="item-title panel-close">Inicio</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="item-content item-link">
+                                            <div class="item-media"><i class="icon f7-icons">logout</i></div>
+                                            <div class="item-inner">
+                                                <div class="item-title panel-close" onclick="salir();">Cerrar Sesión</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <button id="settings" class="os-conditional android ios">Open App Settings</button>
+        <div class="views">
+            <div class="view view-main">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="center sliding">Iniciar Sesión</div>
+                    </div>
+                </div>
 
-    <button id="request-location-always" class="ios-only request-location">Request Location Authorization Always</button>
-    <button id="request-location-in-use" class="ios-only request-location">Request Location Authorization When In Use</button>
-    <button id="request-location" class="android-only">Request Location Authorization</button>
-    <button id="get-location">Get Current Location</button>
+                <div class="pages navbar-through toolbar-through">
+                    <div data-page="LoginIndex" class="page">
+                        <div class="page-content">
+                            <form id="LoginForm">
+                                <div class="list-block">
+                                    <center><img src="webroot/img/logo-login.png" height="200" width="200"></center>
+                                </div>
+                                
+                                <div class="list-block">
+                                    <li class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title label">Usuario</div>
+                                            <div class="item-input">
+                                                <input type="text" name="usuario" id="usuario" placeholder="Usuario / Teléfono" required>
+                                            </div>
+                                        </div>
+                                    </li>
+                                        
+                                    <li class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title label">Contraseña</div>
+                                            <div class="item-input">
+                                                <input type="password" name="contrasenia" id="contrasenia" placeholder="Contraseña" required>
+                                            </div>
+                                        </div>
+                                    </li>   
+                                </div>
 
-    <button id="request-motion" class="ios-only">Request/Check Motion Authorization</button>
+                                <div class="list-block">
+                                    <a href="#" id="IniciarSesion" name="IniciarSesion" class="button button-big button-fill form-from-data">Iniciar Sesión</a>
+                                </div>
+                            </form>
+                            <br />
+                            <div class="list-block">
+                                <center><a href="view/Pasajeros/add.html">Crear Nuevo Usuario</a></center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <button id="request-camera" class="os-conditional android ios">Request Camera Authorization</button>
-    <button id="request-camera-roll" class="ios-only">Request Camera Roll Authorization</button>
-    <button id="use-camera">Use Camera</button>
+            </div>
+        </div>
 
-    <button id="request-microphone" class="os-conditional android ios">Request Microphone Authorization</button>
-    <button id="request-contacts" class="os-conditional android ios">Request Contacts Authorization</button>
-    <button id="request-calendar" class="os-conditional android ios">Request Calendar Authorization</button>
-    <button id="request-reminders" class="ios-only">Request Reminders Authorization</button>
+        <!-- <script type="text/javascript" src="webroot/js/ng-cordova.js"></script> -->
+        <!-- <script type="text/javascript" src="webroot/js/cordova.js"></script> -->
+        <!-- <script type="text/javascript" src="cordova.js"></script> -->
+        <script type="text/javascript" src="webroot/js/globals.js"></script>
+        <script type="text/javascript" src="webroot/js/jquery-2.2.0.js"></script>
+        <script type="text/javascript" src="webroot/helpers/TaxiSeguroUtilities.js"></script>
+        <script type="text/javascript" src="webroot/js/framework7.min.js"></script>
+        <script type="text/javascript" src="webroot/js/TimeCircles.js"></script>
+        <script type="text/javascript" src="webroot/js/jquery.rateyo.min.js"></script>
 
-    <button id="location-settings" class="os-conditional android windows">Open Location settings</button>
-    <button id="mobile-data-settings" class="os-conditional android windows">Open Mobile data settings</button>
-    <button id="bluetooth-settings" class="os-conditional android windows">Open Bluetooth settings</button>
-    <button id="wifi-settings" class="os-conditional android windows">Open WiFi settings</button>
-    <button id="wireless-settings" class="android-only">Open Wireless settings</button>
-    <button id="nfc-settings" class="android-only">Open NFC settings</button>
+        <script src="webroot/js/framework7.min.js"></script>
+        <script src="webroot/js/framework7.3dpanels.js"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9Wpp7_aZf8tQ_Nh2odQ6aZVb9tsFjFpo&libraries=geometry"></script>
 
-    <button id="enable-wifi" class="os-conditional android windows">Enable Wifi</button>
-    <button id="disable-wifi" class="os-conditional android windows">Disable Wifi</button>
+        <script type="text/javascript" src="controller/LoginController.js"></script>
+        <script type="text/javascript" src="controller/PasajeroController.js"></script>
+        <script type="text/javascript" src="controller/ViajeController.js"></script>
+        <script type="text/javascript" src="controller/Chofer/activoController.js"></script>
+        <script type="text/javascript" src="controller/Chofer/peticionController.js"></script>
+        <script type="text/javascript" src="controller/Chofer/AceptacionController.js"></script>
+        <script type="text/javascript" src="controller/Chofer/comienzaViajeController.js"></script>
+        <script type="text/javascript" src="controller/Chofer/terminaViajeController.js"></script>
+        <script type="text/javascript" src="controller/Pasajeros/EditController.js"></script>
+        <script type="text/javascript" src="controller/Pasajeros/UbicacionController.js"></script>
+        <script type="text/javascript" src="controller/Pasajeros/ViewController.js"></script>
+        <script type="text/javascript" src="controller/Pasajeros/terminaViajeController.js"></script>
+        <script type="text/javascript" src="controller/Pasajeros/comienzaViajeController.js"></script>
+        <script type="text/javascript" src="controller/Viajes/comienzaViajeController.js"></script>
+        <script type="text/javascript" src="controller/Viajes/rutaController.js"></script>
+        <script type="text/javascript">
+            function finalizaViaje() {
+                $.ajax({
+                    type: "POST", 
+                    url:  window.server + "chofer/cambiar_estado_viaje.php",
+                    data: ({
+                        id: window.viaje_id,
+                        estado: 'finalizado'
+                    }),
+                    cache: false,
+                    dataType: "text",
+                    success: function(data){
+                        if (data) {
+                            clearInterval(refreshIntervalId);
+                            mainView.router.loadPage('view/Chofer/terminaViaje.html');
+                        }else{
+                            myApp.alert("Error, verifica tu conexión e intenta de nuevo", "¡Atención!");
+                        }
+                        
+                    }
+                });//fin de ajax
+            }
+        </script>
 
-    <button id="request-bluetooth" class="ios-only">Request Bluetooth Authorization</button>
-    <button id="enable-bluetooth" class="os-conditional android windows">Enable Bluetooth</button>
-    <button id="disable-bluetooth" class="os-conditional android windows">Disable Bluetooth</button>
+        <div class="popup popup-about">
+            <div class="content-block">
+                <div class="content-block-title">Cancelar viaje</div>
+                <div class="card">
+                  <div class="card-content">
+                    <div class="card-content-inner">
+                        <p>¿Porqué cancelas?</p>
+                        <a href="javascript: cancelacion('Problema_personal');" class="button active">Problema personal</a>
+                        <br>
+                        <a href="javascript: cancelacion('El_cliente_no_se_presento');" class="button active">El cliente no se presentó</a>
+                        <br>
+                        <a href="javascript: cancelacion('El_cliente_pidio_la_cancelacion');" class="button active">El cliente pidió la cancelación</a>
+                        <br>
+                        <a href="javascript: cancelacion('Direccion_incorrecta_error_del_sistema');" class="button active">Dirección incorrecta, error del sistema</a>
+                        <br>
+                        <a href="javascript: cancelacion('otro');" class="button active">Otro</a>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <a href="#" class="close-popup">Cerrar</a>
+                  </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="popup popup-pasajero">
+            <div class="content-block">
+                <div class="content-block-title">Cancelar viaje</div>
+                <div class="card">
+                  <div class="card-content">
+                    <div class="card-content-inner">
+                        <p>¿Porqué cancelas?</p>
+                        <a href="javascript: cancelacionPasajero('Problema_personal');" class="button active">Problema personal</a>
+                        <br>
+                        <a href="javascript: cancelacionPasajero('El_chofer_no_se_presento');" class="button active">El chofer no se presentó</a>
+                        <br>
+                        <a href="javascript: cancelacionPasajero('El_chofer_pidio_la_cancelacion');" class="button active">El chofer pidió la cancelación</a>
+                        <br>
+                        <a href="javascript: cancelacionPasajero('Direccion_incorrecta_error_del_sistema');" class="button active">Dirección incorrecta, error del sistema</a>
+                        <br>
+                        <a href="javascript: cancelacionPasajero('otro');" class="button active">Otro</a>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <a href="#" class="close-popup">Cerrar</a>
+                  </div>
+                </div>
+            </div>
+        </div>
 
-    <div class="request-external-sd android-only">
-        <button id="request-external-sd-permission">Request external SD permission</button>
-        <button id="request-external-sd-details">Request external SD details</button>
-        <div id="request-external-sd-details-results"></div>
-        <button id="write-external-sd-file">Write external SD file</button>
-    </div>
-</div>
+        <script type="text/javascript">
+
+            function cancelacion(info){
+                $.ajax({
+                    type: "POST", 
+                    url:  window.server + "chofer/rechaza_viaje_encurso.php",
+                    data: ({
+                        id: window.viaje_id,
+                        info_adicional: info
+                    }),
+                    cache: false,
+                    dataType: "text",
+                    success: function(data){
+                        if (data) {
+                            $.ajax({
+                                type: "POST", 
+                                url:  window.server + "chofer/cambiar_estado.php",
+                                data: ({
+                                    id: window.user_id_global,
+                                }),
+                                cache: false,
+                                dataType: "text",
+                                success: function(data){
+                                    //document.getElementById('info').innerHTML = data;
+                                    clearInterval(refreshIntervalId);
+                                    myApp.closeModal('.popup-about')
+                                    mainView.router.loadPage('view/Chofer/Index.html');
+                                }
+                            });//fin de ajax
+                            
+                        }
+                    }
+                }).fail( function() {
+                    myApp.alert('Comprueba tu conexión a internet e intenta de nuevo', '¡Atención!');
+
+                });//fin de ajax
+            }
+
+            function cancelacionPasajero(info){
+                $.ajax({
+                    type: "POST", 
+                    url:  window.server + "pasajeros/cancelar_viaje_encurso.php",
+                    data: ({
+                        id: window.viaje_id,
+                        info_adicional: info
+                    }),
+                    cache: false,
+                    dataType: "text",
+                    success: function(data){
+                        if (data) {
+                            //clearInterval(refreshIntervalId);
+                            myApp.closeModal('.popup-pasajero')
+                            mainView.router.loadPage('view/Viajes/Index.html');
+                        }
+                    }
+                }).fail( function() {
+                    myApp.alert('Comprueba tu conexión a internet e intenta de nuevo', '¡Atención!');
+
+                });//fin de ajax
+            }
+        </script>
 </body>
 </html>

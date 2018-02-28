@@ -1,0 +1,22 @@
+#Mon Feb 05 13:15:05 COT 2018
+renamed.6=classes7.dex
+renamed.5=classes6.dex
+renamed.4=classes5.dex
+renamed.3=classes4.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex
+base.6=C\:\\xampp\\htdocs\\TaxiSeguro3\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\4
+base.5=C\:\\xampp\\htdocs\\TaxiSeguro3\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\2
+base.4=C\:\\xampp\\htdocs\\TaxiSeguro3\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\5
+base.3=C\:\\xampp\\htdocs\\TaxiSeguro3\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\3
+base.2=C\:\\xampp\\htdocs\\TaxiSeguro3\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\6
+base.1=C\:\\xampp\\htdocs\\TaxiSeguro3\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\1
+base.0=C\:\\xampp\\htdocs\\TaxiSeguro3\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+file.6=C\:\\xampp\\htdocs\\TaxiSeguro3\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\4\\classes.dex
+file.5=C\:\\xampp\\htdocs\\TaxiSeguro3\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\2\\classes.dex
+file.4=C\:\\xampp\\htdocs\\TaxiSeguro3\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\5\\classes.dex
+file.3=C\:\\xampp\\htdocs\\TaxiSeguro3\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\3\\classes.dex
+file.2=C\:\\xampp\\htdocs\\TaxiSeguro3\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\6\\classes.dex
+file.1=C\:\\xampp\\htdocs\\TaxiSeguro3\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\1\\classes.dex
+file.0=C\:\\xampp\\htdocs\\TaxiSeguro3\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0\\classes.dex
